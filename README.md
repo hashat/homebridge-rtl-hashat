@@ -1,6 +1,11 @@
 # homebridge-rtl
 
-[![NPM Downloads](https://img.shields.io/npm/dm/homebridge-rtl.svg?style=flat)](https://npmjs.org/package/homebridge-rtl)
+[//]: # [![NPM Downloads](https://img.shields.io/npm/dm/homebridge-rtl.svg?style=flat)](https://npmjs.org/package/homebridge-rtl)
+
+This is a fork of [NorthernMan54](https://github.com/NorthernMan54)'s [homebridge-rtl](https://github.com/NorthernMan54/homebridge-rtl) repo / HomeBridge plugin, for my own improvement purposes.
+All conditions apply; MIT license.
+
+## Original README.md
 
 Homebridge plugin to display information from 433 Mhz sensors, like the `Skylink HA-434TL motion sensor` or the `AcuRite Digital Wireless Fridge and Freezer Thermometer` temperature sensor.  This plugin uses the [RTL_433](https://github.com/merbanan/rtl_433) package to listen to the sensor in-conjunction with a sdr device to receive the signals from the sensor.  In my setup I use this [RTL_SDR](https://www.amazon.ca/gp/product/B00PAGS0HO/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1) to receive the radio signal from the sensor.
 
