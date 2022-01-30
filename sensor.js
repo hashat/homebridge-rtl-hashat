@@ -55,7 +55,7 @@ function rtl433Server() {
   var readline = require('readline');
   var previousMessage;
   this.log("Spawning rtl_433");
-  var proc = childProcess.spawn('pkill rtl_433;/usr/local/bin/rtl_433', ['-q', '-F', 'json', '-C', 'si'], {
+  var proc = childProcess.spawn('pkill rtl_433;/usr/local/bin/rtl_433', ['-f', '868.323M', '-Y', 'classic', '-R', '113', '-s', '1.024M', '-F', 'json'], {
     shell: true
   });
   readline.createInterface({
@@ -72,7 +72,7 @@ function rtl433Server() {
         if (data.id) {
           devices = getDevices.call(this, data.id);
         } else if (data.channel) {
-          devices = getDevices.call(this, data.channel);
+          devices = getDevices.call(this, data.Channel);
         } else {
           this.log.error("FYI: RTL Message missing device or channel identifier.");
           this.log("Message", this.message.toString());

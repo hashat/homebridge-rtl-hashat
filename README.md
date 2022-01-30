@@ -1,7 +1,5 @@
 # homebridge-rtl
 
-[//]: # [![NPM Downloads](https://img.shields.io/npm/dm/homebridge-rtl.svg?style=flat)](https://npmjs.org/package/homebridge-rtl)
-
 This is a fork of [NorthernMan54](https://github.com/NorthernMan54)'s [homebridge-rtl](https://github.com/NorthernMan54/homebridge-rtl) repo / HomeBridge plugin, for my own improvement purposes.
 All conditions apply; MIT license.
 
