@@ -122,7 +122,7 @@ function Rtl433Accessory(device, log, unit) {
 Rtl433Accessory.prototype = {
   updateStatus: function(data) {
     try {
-      this.log("Updating", this.name);
+      this.log.debug("Updating", this.name);
       this.lastUpdated = Date.now();
       clearTimeout(this.timeout);
       this.timeout = setTimeout(deviceTimeout.bind(this), this.deviceTimeout * 60 * 1000);

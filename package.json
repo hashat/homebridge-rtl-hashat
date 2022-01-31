@@ -1,6 +1,6 @@
 {
   "name": "homebridge-rtl-hashat",
-  "version": "0.0.29.01",
+  "version": "0.0.29.02",
   "description": "RTL_433 based sensor for Homebridge",
   "main": "sensor.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hashat/homebridge-rtl-hashat/homebridge-rtl-hashat.git"
+    "url": "git://github.com/hashat/homebridge-rtl-hashat.git"
   },
   "keywords": [
     "homebridge-plugin",
