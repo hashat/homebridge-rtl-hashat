@@ -19,7 +19,7 @@ module.exports = (homebridge) => {
   CustomCharacteristic = require('./lib/CustomCharacteristic.js')(homebridge);
   FakeGatoHistoryService = require('fakegato-history')(homebridge);
 
-  homebridge.registerPlatform('homebridge-rtl', 'rtl_433', rtl433Plugin);
+              homebridge.registerPlatform('homebridge-rtl', 'rtl_433', rtl433Plugin);
 };
 
 function rtl433Plugin(log, config, api) {
@@ -28,13 +28,13 @@ function rtl433Plugin(log, config, api) {
   this.options = config.options || {};
   this.storage = config['storage'] || "fs";
 
-  this.spreadsheetId = config['spreadsheetId'];
+  // this.spreadsheetId = config['spreadsheetId'];
   this.devices = config['devices'];
 
-  if (this.spreadsheetId) {
-    this.log_event_counter = 59;
-    this.logger = new Logger(this.spreadsheetId);
-  }
+  // if (this.spreadsheetId) {
+  //   this.log_event_counter = 59;
+  //   this.logger = new Logger(this.spreadsheetId);
+  // }
 }
 
 rtl433Plugin.prototype = {
@@ -63,6 +63,7 @@ function rtl433Server() {
     terminal: false
   }).on('line', function(message) {
     debug("Message", message.toString());
+    this.log("JSON row was: ", message.toString())
 
     if (message.toString().startsWith('{')) {
       try {
@@ -112,11 +113,11 @@ function rtl433Server() {
 function Rtl433Accessory(device, log, unit) {
   this.id = device.id;
   this.type = device.type;
-  this.log = log;
   this.name = device.name;
   this.alarm = device['alarm']
   this.deviceTimeout = device['timeout'] || 120; // Mark as unavailable after 2 hours
   this.humidity = device['humidity'] || false; // Add humidity data to temerature sensor
+  this.log = log;
 }
 
 Rtl433Accessory.prototype = {
@@ -247,12 +248,12 @@ Rtl433Accessory.prototype = {
   getServices: function() {
     this.log("getServices", this.name);
     // Information Service
-    var informationService = new Service.AccessoryInformation();
+              var informationService = new Service.AccessoryInformation();
 
-    informationService
-      .setCharacteristic(Characteristic.Manufacturer, "homebridge-rtl_433")
-      .setCharacteristic(Characteristic.SerialNumber, hostname + "-" + this.name)
-      .setCharacteristic(Characteristic.FirmwareRevision, require('./package.json').version);
+              informationService
+                .setCharacteristic(Characteristic.Manufacturer, "homebridge-rtl_433")
+                .setCharacteristic(Characteristic.SerialNumber, hostname + "-" + this.name)
+                .setCharacteristic(Characteristic.FirmwareRevision, require('./package.json').version);
     // Thermostat Service
 
     switch (this.type) {
@@ -310,22 +311,22 @@ Rtl433Accessory.prototype = {
             .setCharacteristic(Characteristic.Model, "Humidity Sensor");
         }
         break;
-      case "motion":
-        this.sensorService = new Service.MotionSensor(this.name);
+      // case "motion":
+      //   this.sensorService = new Service.MotionSensor(this.name);
 
-        this.sensorService.addCharacteristic(CustomCharacteristic.LastActivation);
+      //   this.sensorService.addCharacteristic(CustomCharacteristic.LastActivation);
 
-        this.timeoutCharacteristic = Characteristic.MotionDetected;
-        this.timeout = setTimeout(deviceTimeout.bind(this), this.deviceTimeout * 60 * 1000); // 5 minutes
+      //   this.timeoutCharacteristic = Characteristic.MotionDetected;
+      //   this.timeout = setTimeout(deviceTimeout.bind(this), this.deviceTimeout * 60 * 1000); // 5 minutes
 
-        this.sensorService.log = this.log;
-        this.loggingService = new FakeGatoHistoryService("motion", this.sensorService, {
-          storage: this.storage,
-          minutes: this.refresh * 10 / 60
-        });
-        informationService
-          .setCharacteristic(Characteristic.Model, "Motion Sensor");
-        break;
+      //   this.sensorService.log = this.log;
+      //   this.loggingService = new FakeGatoHistoryService("motion", this.sensorService, {
+      //     storage: this.storage,
+      //     minutes: this.refresh * 10 / 60
+      //   });
+      //   informationService
+      //     .setCharacteristic(Characteristic.Model, "Motion Sensor");
+      //   break;
       default:
         this.log.error("No events defined for sensor type %s", this.type);
     }
