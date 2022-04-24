@@ -63,7 +63,7 @@ function rtl433Server() {
     terminal: false
   }).on('line', function(message) {
     debug("Message", message.toString());
-    this.log("JSON row was: ", message.toString())
+    this.log.debug("JSON row was: ", message.toString())
 
     if (message.toString().startsWith('{')) {
       try {
