@@ -116,7 +116,7 @@ function Rtl433Accessory(device, log, unit) {
   this.name = device.name;
   this.alarm = device['alarm']
   this.deviceTimeout = device['timeout'] || 120; // Mark as unavailable after 2 hours
-  this.humidity = device['humidity'] || false; // Add humidity data to temerature sensor
+  this.humidity = device['humidity'] || false; // Add humidity data to temperature sensor
   this.log = log;
 }
 
